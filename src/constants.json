@@ -1,0 +1,12 @@
+{
+  "events" : {
+    "chat" : {
+      "send"    : "send message",
+      "receive" : "broadcast"
+    },
+    "authentication" : {
+      "logged_in"   : "in",
+      "logged_out"  : "out"
+    }
+  }
+}
