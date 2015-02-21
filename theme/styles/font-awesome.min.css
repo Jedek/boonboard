@@ -3,8 +3,8 @@
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */@font-face {
 	font-family: 'FontAwesome';
-	src: url('../../KAdmin/KAdmin-Light/fonts/fontawesome-webfont.eot?v=4.1.0');
-	src: url('../../KAdmin/KAdmin-Light/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../../KAdmin/KAdmin-Light/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../../KAdmin/KAdmin-Light/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../../KAdmin/KAdmin-Light/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+	src: url('../../file/fonts/fontawesome-webfont.eot?v=4.1.0');
+	src: url('../../file/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../../file/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../../file/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../../file/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
 	font-weight: normal;
 	font-style: normal
 }
