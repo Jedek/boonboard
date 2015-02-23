@@ -303,13 +303,6 @@ $(function () {
     });
     //END CHECKBOX TABLE
 
-    //BEGIN JQUERY NEWS UPDATE
-    $('#news-update').ticker({
-        controls: false,
-        titleText: ''
-    });
-    //END JQUERY NEWS UPDATE
-
     $('.option-demo').hover(function() {
         $(this).append("<div class='demo-layout animated fadeInUp'><i class='fa fa-magic mrs'></i>Demo</div>");
     }, function() {

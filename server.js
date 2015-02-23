@@ -16,7 +16,6 @@ var app         = require('express')(),
 /**
  * Authentication module that uses Google
  */
-
 passport.use(new GoogleStrategy({
         returnURL: 'http://localhost:3000/login',
         realm: 'http://localhost:3000/'
@@ -63,12 +62,7 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    console.log("Got a connection");
-    io.on('user', function(user){
-        console.log("Got a user!");
-        console.dir(user);
-    });
-    modules.initialize(constants, io, socket);
+    ioReport("Got a connection");
 });
 
 http.listen(3000, function(){
@@ -83,4 +77,9 @@ getTimeStamp = function() {
     var s = ('0'+date.getSeconds()).slice(-2);
 
     return h + ':' + m + ':' + s;
+};
+
+ioReport = function(msg) {
+    msg = getTimeStamp() + ' [IO] ' + msg;
+    console.log(msg.red.bgWhite);
 };
