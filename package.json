@@ -19,6 +19,8 @@
     "file-loader": "~0.8.1",
     "url-loader": "~0.5.5",
     "stylus": "~0.50.0",
-    "nib": "~1.1.0"
+    "nib": "~1.1.0",
+    "passport-google": "~0.3.0",
+    "passport": "~0.2.1"
   }
 }

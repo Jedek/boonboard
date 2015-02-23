@@ -6,6 +6,10 @@ var events;
 console.log("waiting for constants...");
 
 socket.on("initialized", function(constants){
+
+    socket.emit('user', 'Jedek');
+
+
     events = constants.events;
     console.log("Received constants!: " + events);
 

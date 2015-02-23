@@ -1,15 +1,48 @@
 var app         = require('express')(),
     http        = require('http').Server(app),
     io          = require('socket.io')(http),
+    passport    = require('passport'),
+    GoogleStrategy = require('passport-google').Strategy,
+
+    colors      = require('colors'),
     constants   = require('./src/constants.json'),
     root        = __dirname,
 
-    file_router        = require('./src/server/modules/routers/files'),
-    events = require('./src/server/modules/events/events.js');
+    file_router = require('./src/server/modules/routers/files'),
+    modules     = require('./src/server/modules/index.js'),
+    users       = [];
 
+
+/**
+ * Authentication module that uses Google
+ */
+
+passport.use(new GoogleStrategy({
+        returnURL: 'http://localhost:3000/login',
+        realm: 'http://localhost:3000/'
+    },
+    function(identifier, profile, done) {
+        User.findOrCreate({ openId: identifier }, function(err, user) {
+            done(err, user);
+        });
+    }
+));
+
+// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+//     /auth/google/return
+app.get('/auth/google', passport.authenticate('google'));
+
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/return',
+    passport.authenticate('google', { successRedirect: '/',
+        failureRedirect: '/login' }));
 
 app.use(function timeLog(req, res, next) {
-    console.log(getTimeStamp() + ' Incoming request for ' + req.originalUrl);
+    var message = getTimeStamp() + ' [Request] ' + req.originalUrl;
+    console.log(message.green);
     next();
 });
 
@@ -30,7 +63,12 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    events.initialize(constants, io, socket);
+    console.log("Got a connection");
+    io.on('user', function(user){
+        console.log("Got a user!");
+        console.dir(user);
+    });
+    modules.initialize(constants, io, socket);
 });
 
 http.listen(3000, function(){
