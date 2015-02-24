@@ -17,13 +17,13 @@ render(<SideBar />, document.getElementById("theBar"));
 
 var routes = (
     <Route path="/" handler={Index}>
-        <Route name="login" path="login" handler={Login} />
+        <Route path="login" handler={Login}/>
     </Route>
 );
 
 
-Router.run(routes, function (Handler) {
-    render(<Handler/>, document.getElementById('page-wrapper'));
+Router.run(routes, Router.HistoryLocation, function (Handler) {
+    render(<Handler />, document.getElementById('page-wrapper'));
 });
 
 function render(component, target){
