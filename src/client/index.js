@@ -1,21 +1,32 @@
 import React          from 'react'
+import Router         from 'react-router'
 import TopBar         from './topbar'
 import SideBar        from './sidebar'
 
-var session;
+import Login          from './pages/login'
+import Index          from './pages/index'
+
+var { Route, Redirect, RouteHandler, Link } = Router;
 
 socket.on("initialized", function(){
-    if(session === undefined) {
-        $.getJSON( "./session", function( data ) {
-            session = data;
-        });
-    }
+    console.log("got connection with the server");
 });
 
-//socket.on("initialized", function(constants){
+render(<TopBar />, document.getElementById("the_top"));
+render(<SideBar />, document.getElementById("theBar"));
 
-React.render(<TopBar user={session}/>, document.getElementById("the_top"));
-React.render(<SideBar />, document.getElementById("wrapper"));
+var routes = (
+    <Route path="/" handler={Index}>
+        <Route name="login" path="login" handler={Login} />
+    </Route>
+);
 
-//});
+
+Router.run(routes, function (Handler) {
+    render(<Handler/>, document.getElementById('page-wrapper'));
+});
+
+function render(component, target){
+    React.render(component, target);
+}
 

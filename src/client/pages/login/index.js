@@ -1,14 +1,14 @@
 import React        from 'react'
 
-var Index = React.createClass({
+var Login = React.createClass({
     render: function() {
         return (
             <div>
-                INDEX HERE LOL
+                LOGGING IN LOL
             </div>
         );
     }
 });
 
-export default Index
+export default Login
 

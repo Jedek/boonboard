@@ -15,11 +15,9 @@ var app         = require('express')(),
 app.use(session({secret: 'boonoonoo-pi'}));
 app.use(passport.initialize());
 app.use(passport.session());
-
 /* <================= INITIALIZATION  =================> */
 
 /* <================= AUTHENTICATION  =================> */
-
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -40,8 +38,12 @@ passport.use(new GoogleStrategy({
 app.get('/auth/google', passport.authenticate('google'));
 
 app.get('/auth/google/return',
-    passport.authenticate('google', { successRedirect: '/',
-        failureRedirect: '/login' }));
+    passport.authenticate('google'), function(req, res){
+        if(req.user) {
+            res.redirect('/');
+        }
+        res.redirect('/login');
+    });
 
 isAuthenticated = function(req, res, next) {
     if(req.user) {
@@ -93,6 +95,10 @@ app.get('/', isAuthenticated, function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/login', function(req, res){
+    res.sendFile(__dirname + '/index.html');
+})
+
 app.get('/logout', function(req, res){
     req.logout();
     res.send();
@@ -105,7 +111,6 @@ app.get('/session', function(req, res){
         res.send();
     }
 });
-
 /* <================= ROUTES  =================> */
 
 /* <================= SOCKET EVENTS  =================> */
