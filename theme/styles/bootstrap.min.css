@@ -4091,6 +4091,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 }
 .panel {
 	margin-bottom: 20px;
+    padding-left: 10px;
 	background-color: #fff;
 	border: 1px solid transparent;
 	border-radius: 4px;

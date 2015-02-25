@@ -11,9 +11,21 @@ var SideBar = React.createClass({
                             <div className="icon-bg bg-orange"></div>
                         </i><span className="menu-title">Dashboard</span></a></li>
 
-                        <li><a href="dashboard.html"><i className="fa fa-tachometer fa-fw">
+                        <li><a href="dashboard.html"><i className="fa fa-linux fa-fw">
                             <div className="icon-bg bg-orange"></div>
-                        </i><span className="menu-title">Dashboard</span></a></li>
+                        </i><span className="menu-title">Raspbian</span></a></li>
+
+                        <li><a href="dashboard.html"><i className="fa fa-play fa-fw">
+                            <div className="icon-bg bg-orange"></div>
+                        </i><span className="menu-title">XBMC</span></a></li>
+
+                        <li><a href="dashboard.html"><i className="fa fa-gamepad fa-fw">
+                            <div className="icon-bg bg-orange"></div>
+                        </i><span className="menu-title">RetroPie</span></a></li>
+
+                        <li><a href="dashboard.html"><i className="fa fa-info fa-fw">
+                            <div className="icon-bg bg-orange"></div>
+                        </i><span className="menu-title">Statistics</span></a></li>
                     </ul>
                 </div>
             </nav>
