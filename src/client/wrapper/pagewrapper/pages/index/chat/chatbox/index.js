@@ -14,7 +14,7 @@ var ChatBox = React.createClass({
                     <input id="input-chat" type="text" placeholder="Type a message here..." className="form-control" />
                         <span id="btn-chat" className="input-group-btn">
                             <button type="button" onClick={this.sendChat} className="btn btn-green">
-                                <i class="fa fa-check">Send!</i>
+                                <i className="fa fa-check">Send!</i>
                             </button>
                         </span>
                 </div>

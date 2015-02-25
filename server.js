@@ -1,18 +1,22 @@
 /* <================= INITIALIZATION  =================> */
-var app         = require('express')(),
-    http        = require('http').Server(app),
-    io          = require('socket.io')(http),
-    passport    = require('passport'),
-    GoogleStrategy = require('passport-google').Strategy,
-    session = require('express-session'),
+var app             = require('express')(),
+    http            = require('http').Server(app),
+    io              = require('socket.io')(http),
+    passport        = require('passport'),
+    GoogleStrategy  = require('passport-google').Strategy,
+    session         = require('express-session'),
+    colors          = require('colors'),
 
-    colors      = require('colors'),
     constants   = require('./src/constants.json'),
     root        = __dirname,
 
     file_router = require('./src/server/modules/routers/files');
 
-app.use(session({secret: 'boonoonoo-pi'}));
+app.use(session({
+    secret: 'boonoonoo-pi',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 /* <================= INITIALIZATION  =================> */
@@ -49,7 +53,7 @@ isAuthenticated = function(req, res, next) {
     if(req.user) {
         return next();
     } else {
-        res.redirect("/auth/google");
+        res.redirect("/login");
     }
 };
 /* <================= AUTHENTICATION  =================> */
@@ -92,6 +96,10 @@ app.get('/app', function(req, res) {
 });
 
 app.get('/', isAuthenticated, function(req, res){
+    res.redirect("/home");
+});
+
+app.get('/home', isAuthenticated, function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -101,7 +109,7 @@ app.get('/login', function(req, res){
 
 app.get('/logout', function(req, res){
     req.logout();
-    res.send();
+    res.redirect("/home");
 });
 
 app.get('/session', function(req, res){

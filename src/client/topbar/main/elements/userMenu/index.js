@@ -21,11 +21,15 @@ var UserMenu = React.createClass({
         return {data: []};
     },
     render: function() {
-        return (
-            <ul className="nav navbar navbar-top-links navbar-right mbn">
-                <User user={this.state.data} />
-            </ul>
-        );
+        if(this.state.data !== null) {
+            return (
+                <ul className="nav navbar navbar-top-links navbar-right mbn">
+                    <User user={this.state.data} />
+                </ul>
+            );
+        }else {
+            return(null);
+        }
     }
 });
 

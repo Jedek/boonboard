@@ -541,7 +541,7 @@ hr {
   }
 }
 .page-title-breadcrumb {
-  padding: 10px 20px;
+  padding: 10px 15px 40px 15px;
   background: #ffffff;
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
@@ -1179,7 +1179,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f7', end
 }
 /* End Left Sidebar Collapsed */
 .page-content {
-  padding: 20px 20px 50px 20px;
+  padding: 0px 20px 50px 20px;
   min-height: 700px;
 }
 #footer {
