@@ -8,6 +8,10 @@ import PageWrapper    from './wrapper/pagewrapper'
 /* The pages in our app */
 import Index          from './wrapper/pagewrapper/pages/index'
 import Login          from './wrapper/pagewrapper/pages/login'
+import Raspbian       from './wrapper/pagewrapper/pages/raspbian'
+import XBMC           from './wrapper/pagewrapper/pages/xbmc'
+import RetroPie       from './wrapper/pagewrapper/pages/retropie'
+import Statistics     from './wrapper/pagewrapper/pages/statistics'
 
 
 var { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
@@ -34,17 +38,17 @@ var App = React.createClass({
 
 var routes = (
     <Route handler={App}>
-        <Route name="home" sharedHandler={PageWrapper} handler={Index} />
-        <Route name="login"  sharedHandler={PageWrapper} handler={Login} />
+        <Route name="dashboard"     sharedHandler={PageWrapper} handler={Index} />
+        <Route name="login"         sharedHandler={PageWrapper} handler={Login} />
+        <Route name="raspbian"      sharedHandler={PageWrapper} handler={Raspbian} />
+        <Route name="xbmc"          sharedHandler={PageWrapper} handler={XBMC} />
+        <Route name="retropie"      sharedHandler={PageWrapper} handler={RetroPie} />
+        <Route name="statistics"    sharedHandler={PageWrapper} handler={Statistics} />
     </Route>
 );
 
 
 Router.run(routes, Router.HistoryLocation, function (Handler) {
-    render(<Handler />, document.getElementById('the_content'));
+    React.render(<Handler />, document.getElementById('the_content'));
 });
-
-function render(component, target){
-    React.render(component, target);
-}
 

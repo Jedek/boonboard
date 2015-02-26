@@ -96,10 +96,26 @@ app.get('/app', function(req, res) {
 });
 
 app.get('/', isAuthenticated, function(req, res){
-    res.redirect("/home");
+    res.redirect("/dashboard");
 });
 
-app.get('/home', isAuthenticated, function(req, res){
+app.get('/dashboard', isAuthenticated, function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/raspbian', isAuthenticated, function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/xbmc', isAuthenticated, function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/retropie', isAuthenticated, function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/statistics', isAuthenticated, function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -109,7 +125,7 @@ app.get('/login', function(req, res){
 
 app.get('/logout', function(req, res){
     req.logout();
-    res.redirect("/home");
+    res.redirect("/dashboard");
 });
 
 app.get('/session', function(req, res){

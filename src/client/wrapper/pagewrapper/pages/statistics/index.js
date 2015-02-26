@@ -1,13 +1,13 @@
 import React from 'react'
 
-var Raspbian = React.createClass({
+var Statistics = React.createClass({
     render: function() {
         return(
             <div className="page-content">
                 <div id="tab-general">
                     <div className="col-lg-12">
                         <div className="panel">
-                           Raspbian
+                           Statistics
                         </div>
                     </div>
                 </div>
@@ -16,4 +16,4 @@ var Raspbian = React.createClass({
     }
 });
 
-export default Raspbian
+export default Statistics

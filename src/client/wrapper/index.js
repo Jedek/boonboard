@@ -7,7 +7,7 @@ var Wrapper = React.createClass({
     render: function(){
         return(
             <div id="wrapper">
-                <SideBar />
+                <SideBar page={this.props.page} />
                 <PageWrapper page={this.props.page} />
             </div>
         );
