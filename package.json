@@ -21,8 +21,8 @@
     "stylus": "~0.50.0",
     "nib": "~1.1.0",
     "passport-google": "~0.3.0",
-    "passport": "~0.2.1",
     "react-router": "~0.12.2",
-    "express-session": "~1.10.3"
+    "express-session": "~1.10.3",
+    "googleapis": "~2.0.3"
   }
 }

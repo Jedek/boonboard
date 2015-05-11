@@ -2,60 +2,70 @@
 var app             = require('express')(),
     http            = require('http').Server(app),
     io              = require('socket.io')(http),
-    passport        = require('passport'),
-    GoogleStrategy  = require('passport-google').Strategy,
+
     session         = require('express-session'),
     colors          = require('colors'),
 
-    constants   = require('./src/constants.json'),
-    root        = __dirname,
+    google          = require('googleapis'),
+    OAuth2          = google.auth.OAuth2,
 
-    file_router = require('./src/server/modules/routers/files');
+    constants       = require('./src/constants.json'),
+    root            = __dirname,
+
+    file_router     = require('./src/server/modules/routers/files');
 
 app.use(session({
     secret: 'boonoonoo-pi',
     resave: false,
     saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 /* <================= INITIALIZATION  =================> */
 
 /* <================= AUTHENTICATION  =================> */
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
+var
+    CLIENT_ID       = '194873919743-4mob5cmn3p993rn2l4p6t4rvtiigbq37.apps.googleusercontent.com',
+    CLIENT_SECRET   = 'kh5hXMJpNi2QndMq6MaXhv9Q',
+    REDIRECT_URL    = 'http://localhost:3000/oauth2callback',
+    oauth2Client    = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL),
+    scopes = [
+        'https://www.googleapis.com/auth/plus.me',
+        'https://www.googleapis.com/auth/calendar'
+    ];
 
-passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-});
+function getAccessToken(oauth2Client, callback) {
+   var url     = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes
+   });
 
-passport.use(new GoogleStrategy({
-        returnURL: 'http://localhost:3000/auth/google/return',
-        realm: 'http://localhost:3000/'
-    },
-    function(identifier, profile, done) {
-        done(null, profile);
-    }
-));
+    console.log(url);
+}
 
-app.get('/auth/google', passport.authenticate('google'));
-
-app.get('/auth/google/return',
-    passport.authenticate('google'), function(req, res){
-        if(req.user) {
-            res.redirect('/');
-        }
-        res.redirect('/login');
-    });
-
-isAuthenticated = function(req, res, next) {
-    if(req.user) {
+var isAuthenticated = function(req, res, next) {
+    if(Object.keys(oauth2Client.credentials).length > 0) {
         return next();
     } else {
         res.redirect("/login");
     }
 };
+
+app.get("/auth/google", function(req, res){
+    var url     = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes
+    });
+
+    res.redirect(url);
+});
+
+app.get("/oauth2callback", function(req, res){
+    oauth2Client.getToken(req.query.code, function(err, tokens){
+        oauth2Client.setCredentials(tokens);
+        res.redirect("/");
+    });
+});
+
 /* <================= AUTHENTICATION  =================> */
 
 /* <================= LOGGING  =================> */
