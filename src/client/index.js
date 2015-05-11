@@ -18,6 +18,11 @@ var { Route, DefaultRoute, Redirect, RouteHandler, Link } = Router;
 
 socket.on("initialized", function(){
     console.log("got connection with the server");
+
+
+    socket.on(constants.events.monitor.uptime, function(theUptime){
+        console.log("Server uptime is: " + theUptime);
+    });
 });
 
 
