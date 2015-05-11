@@ -13,14 +13,10 @@ var app             = require('express')(),
     modules     = require('./src/server/modules/index.js'),
     root        = __dirname,
 
-   file_router     = require('./src/server/modules/routers/files'),
+    file_router     = require('./src/server/modules/routers/files'),
     monitor_router  = require('./src/server/modules/routers/monitor'),
 
     connections = [];
-
-
-
-
 
 app.use(session({
     secret: 'BoonooBerry',
